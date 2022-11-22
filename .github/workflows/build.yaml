@@ -41,4 +41,4 @@ jobs:
         COSIGN_EXPERIMENTAL=1 \
         cosign sign \
           -a "ref=${{ github.sha }}" \
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main
