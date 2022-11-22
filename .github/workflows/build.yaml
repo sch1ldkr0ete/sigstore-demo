@@ -39,6 +39,6 @@ jobs:
     - name:
       run: |
         COSIGN_EXPERIMENTAL=1 \
-        cosign sign --key cosign.key \
+        cosign sign \
           -a "ref=${{ github.sha }}" \
           ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
