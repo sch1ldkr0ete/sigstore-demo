@@ -28,6 +28,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       with:
+        tags: type=sha,format=long
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
     - name: Build and push Docker image
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -38,7 +39,7 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
     - name:
       run: |
-        COSIGN_EXPERIMENTAL=1 \
-        cosign sign \
-          -a "ref=${{ github.sha }}" \
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main
+        cosign sign -a "ref=${{ github.sha }}" ${TAGS}
+      env:
+        TAGS: ${{ steps.docker_meta.outputs.tags }}
+        COSIGN_EXPERIMENTAL: true
