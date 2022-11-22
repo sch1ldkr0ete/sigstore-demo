@@ -38,8 +38,7 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
     - name:
-      run: |
-        cosign sign -a "ref=${{ github.sha }}" ${TAGS}
+      run: cosign sign ${TAGS}
       env:
         TAGS: ${{ steps.docker_meta.outputs.tags }}
         COSIGN_EXPERIMENTAL: true
