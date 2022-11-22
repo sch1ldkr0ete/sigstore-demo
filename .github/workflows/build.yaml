@@ -38,7 +38,7 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
     - name:
-      run: cosign sign ${TAGS}
+      run: cosign sign -a git_sha=$GITHUB_SHA ${TAGS}
       env:
         TAGS: ${{ steps.meta.outputs.tags }}
         COSIGN_EXPERIMENTAL: true
